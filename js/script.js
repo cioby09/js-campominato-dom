@@ -18,13 +18,16 @@
 // Dichiarazioni
 const numberOfSquares = 100;
 let bombsArray = [];
+let scoreArray = [];
+let score = "";
+
+const grid = document.querySelector(".grid");
 
 // Genera griglia al click
 const button = document.getElementById("play");
 button.addEventListener("click",
     function() {
         // Per ogni numero generato genero la casella della griglia corrispondente
-        const grid = document.querySelector(".grid");
         for (let i = 0; i < numberOfSquares; i++) {
             const currentNumber = [i + 1];
             const gridItem = generateGridItem(currentNumber);
@@ -73,7 +76,25 @@ function handleItemClick() {
 
     if (bombsArray.includes(clickedNumber)) {
         this.classList.add("red");
-    } else {
-        this.classList.add("skyblue")
+        alert(`Punteggio finale : ${score} punti`);
+        setTimeout(reset, 1000);
+        function reset() {
+            grid.innerHTML = "";
+            scoreArray = [];
+        }
+        
+    } else if (scoreArray.length < (numberOfSquares - 16) && !scoreArray.includes(clickedNumber)) {
+        this.classList.add("skyblue");
+        scoreArray.push(clickedNumber);
+        score = `${scoreArray.length}`;
+        
+        if (scoreArray.length === (numberOfSquares - 16)) {
+            alert("Hai vinto!");
+            setTimeout(reset, 1000);
+            function reset() {
+                grid.innerHTML = "";
+                scoreArray = [];
+            }
+        }
     }
 }
