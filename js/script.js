@@ -15,8 +15,9 @@
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba.
 
 
-// Dichiaro il numero di quadrati
+// Dichiarazioni
 const numberOfSquares = 100;
+let bombsArray = [];
 
 // Genera griglia al click
 const button = document.getElementById("play");
@@ -30,6 +31,9 @@ button.addEventListener("click",
             gridItem.addEventListener("click", handleItemClick)
             grid.append(gridItem);
         }
+
+        // Genero l'array delle bombe
+        bombsArray = generateBombs(16, numberOfSquares);
     }
 );
 
@@ -42,12 +46,34 @@ function generateGridItem(text) {
     return gridItem;
 }
 
-// Gestisco il click degli Item
-function handleItemClick() {
-    this.classList.add("skyblue")
-}
-
 // Genera un numero casuale
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
+}
+
+// Genera un array di numeri unici
+function generateBombs(bombsQuantity, maxNumber) {
+    let bombsArray = [];
+    
+    while (bombsArray.length < bombsQuantity) {
+        const bomb = getRndInteger(1, maxNumber);
+        // Rendo i numeri unici
+        if (!bombsArray.includes(bomb)) {
+            bombsArray.push(bomb);
+        }
+    }
+    
+    return bombsArray;
+}
+
+// Gestisci il click degli Item
+function handleItemClick() {
+    // Seleziono il testo della cella cliccata
+    const clickedNumber = parseInt(this.querySelector("span").textContent);
+
+    if (bombsArray.includes(clickedNumber)) {
+        this.classList.add("red");
+    } else {
+        this.classList.add("skyblue")
+    }
 }
