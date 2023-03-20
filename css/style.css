@@ -1,0 +1,58 @@
+/* RESET */
+img {
+    max-width: 100%;
+}
+
+/* Layout */
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+/* Header */
+header {
+    width: 100%;
+    height: 5rem;
+    background-color: #FFFFFF;
+}
+
+header img {
+    height: 3rem;
+    margin-right: 2rem;
+}
+
+header .row {
+    width: 100%;
+}
+
+#play {
+    padding: 0 2rem;
+}
+
+/* Main */
+main {
+    width: 100%;
+    height: calc(100% - 5rem);
+    background-color: #00E165;
+}
+
+.grid {
+    width: 50rem;
+    height: 50rem;
+}
+
+.grid-item {
+    width: calc(50rem / 10);
+    height: calc(50rem / 10);
+    border: 1.5px solid #001533;
+    font-size: 2rem;
+    color: #001533;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.skyblue {
+    background-color: skyblue;
+}
